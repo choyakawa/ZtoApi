@@ -261,6 +261,21 @@ const SUPPORTED_MODELS: ModelConfig[] = [
     capabilities: {
       vision: false,
       mcp: true,
+      thinking: false
+    },
+    defaultParams: {
+      top_p: 0.95,
+      temperature: 0.6,
+      max_tokens: 200000
+    }
+  },
+  {
+    id: "GLM-4-6-API-V1-think",
+    name: "GLM-4.6-think",
+    upstreamId: "GLM-4-6-API-V1",
+    capabilities: {
+      vision: false,
+      mcp: true,
       thinking: true
     },
     defaultParams: {
@@ -329,6 +344,7 @@ function normalizeModelId(modelId: string): string {
     // GLM-4.6 映射
     'glm-4-6-api-v1': 'GLM-4-6-API-V1',
     'glm-4.6': 'GLM-4-6-API-V1',
+    'glm-4.6-think': 'GLM-4-6-API-V1-think',
     'glm4.6': 'GLM-4-6-API-V1',
     'glm_4.6': 'GLM-4-6-API-V1',
     // GLM-4.5V 映射
