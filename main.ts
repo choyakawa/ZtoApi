@@ -218,7 +218,7 @@ interface Model {
 const THINK_TAGS_MODE = "strip";
 
 // 伪装前端头部（来自抓包分析）
-const X_FE_VERSION = "prod-fe-1.0.70";
+const X_FE_VERSION = "prod-fe-1.0.94";
 const BROWSER_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0";
 const SEC_CH_UA = "\"Not;A=Brand\";v=\"99\", \"Microsoft Edge\";v=\"139\", \"Chromium\";v=\"139\"";
 const SEC_CH_UA_MOB = "?0";
@@ -816,7 +816,6 @@ async function callUpstreamWithHeaders(
         "X-FE-Version": X_FE_VERSION,
         "Origin": ORIGIN_BASE,
         "Referer": `${ORIGIN_BASE}/c/${refererChatID}`,
-        "Cookie": `token=${authToken}`,
         "X-Signature": signature,
       },
       body: JSON.stringify(upstreamReq)
