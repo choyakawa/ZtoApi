@@ -816,6 +816,7 @@ async function callUpstreamWithHeaders(
         "X-FE-Version": X_FE_VERSION,
         "Origin": ORIGIN_BASE,
         "Referer": `${ORIGIN_BASE}/c/${refererChatID}`,
+        "Cookie": `token=${authToken}`,
         "X-Signature": signature,
       },
       body: JSON.stringify(upstreamReq)
