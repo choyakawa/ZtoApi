@@ -649,6 +649,15 @@ function getClientIP(request: Request): string {
   return "unknown";
 }
 
+async function generateSignature(body: string): Promise<string> {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(body);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  return hashHex;
+}
+
 function setCORSHeaders(headers: Headers): void {
   headers.set("Access-Control-Allow-Origin", "*");
   headers.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
@@ -791,6 +800,8 @@ async function callUpstreamWithHeaders(
     
     debugLog("上游请求体: %s", JSON.stringify(upstreamReq));
     
+    const signature = await generateSignature(upstreamReq);
+    
     const response = await fetch(UPSTREAM_URL, {
       method: "POST",
       headers: {
@@ -804,7 +815,8 @@ async function callUpstreamWithHeaders(
         "sec-ch-ua-platform": SEC_CH_UA_PLAT,
         "X-FE-Version": X_FE_VERSION,
         "Origin": ORIGIN_BASE,
-        "Referer": `${ORIGIN_BASE}/c/${refererChatID}`
+        "Referer": `${ORIGIN_BASE}/c/${refererChatID}`,
+        "X-Signature": signature,
       },
       body: JSON.stringify(upstreamReq)
     });
