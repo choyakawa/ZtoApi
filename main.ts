@@ -291,7 +291,7 @@ const SUPPORTED_MODELS: ModelConfig[] = [
     capabilities: {
       vision: false,
       mcp: true,
-      thinking: true
+      thinking: false
     },
     defaultParams: {
       top_p: 0.95,
