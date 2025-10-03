@@ -270,6 +270,21 @@ const SUPPORTED_MODELS: ModelConfig[] = [
     }
   },
   {
+    id: "0727-106B-API",
+    name: "GLM-4.5-Air",
+    upstreamId: "0727-106B-API",
+    capabilities: {
+      vision: false,
+      mcp: true,
+      thinking: false
+    },
+    defaultParams: {
+      top_p: 0.95,
+      temperature: 0.6,
+      max_tokens: 80000
+    }
+  },
+  {
     id: "GLM-4-6-API-V1-think",
     name: "GLM-4.6-think",
     upstreamId: "GLM-4-6-API-V1",
@@ -342,6 +357,7 @@ function normalizeModelId(modelId: string): string {
   // 处理常见的模型ID映射
   const modelMappings: Record<string, string> = {
     // GLM-4.6 映射
+    'glm-4.5-air': '0727-106B-API',
     'glm-4-6-api-v1': 'GLM-4-6-API-V1',
     'glm-4.6': 'GLM-4-6-API-V1',
     'glm-4.6-think': 'GLM-4-6-API-V1-think',
